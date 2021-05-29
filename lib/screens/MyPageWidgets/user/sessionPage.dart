@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:histutor/model/Session.dart';
+import 'package:histutor/model/User.dart';
 
 import 'package:histutor/state/ApplicationState.dart';
 import 'package:histutor/state/Authentication.dart';

@@ -28,10 +28,8 @@ class _SessionListPageState extends State<SessionListPage> {
   }
 }
 Widget selectSessionPage(List<Session> sessions){
-  print(sessions);
       return ListView.separated(
           itemBuilder: (context, int index){
-            print(sessions[index].category.compareTo("종료")==1);
             return Padding(
               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
               child:
