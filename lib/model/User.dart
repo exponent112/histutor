@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class User {
@@ -15,4 +15,15 @@ class User {
     @required this.time,
     @required this.type,
   });
+
+  factory User.fromFirebase(DocumentSnapshot snapshot) {
+    Map data = snapshot.data();
+    return User(
+      name: data['name'],
+      email: data['email'],
+      studentId: data['studentId'],
+      time: data['time'],
+      type: data['tutor'],
+    );
+  }
 }

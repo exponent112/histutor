@@ -2,10 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:histutor/model/Chat.dart';
 import 'package:histutor/model/Participant.dart';
 import 'package:histutor/model/Session.dart';
+import 'package:histutor/model/Subsession.dart';
+import 'package:histutor/model/User.dart';
 
 class Database {
   CollectionReference sessionReference =
       FirebaseFirestore.instance.collection('Sessions');
+
+  CollectionReference userReference =
+  FirebaseFirestore.instance.collection('Users');
 
   // order by?
   Stream<List<Session>> getSessions() {
@@ -32,7 +37,21 @@ class Database {
           .map((chat) => Chat.fromFirebase(chat)).toList());
   }
 
-  // Stream<QuerySnapshot> getSessions() {
+  // Use when logged in as admin
+  Stream<List<User>> getUsers(int studentId) {
+    return userReference.snapshots().map(
+            (users) => users.docs.map((user) => User.fromFirebase(user)).toList());
+  }
+
+  Stream<List<Subsession>> getUserSessions(String studentId) {
+    return userReference.doc(studentId).collection('Sessions').snapshots().map(
+            (sessions) => sessions.docs
+            .map((session) => Subsession.fromFirebase(session))
+            .toList());
+  }
+
+
+// Stream<QuerySnapshot> getSessions() {
   //   return sessionReference.snapshots();
   // }
 
